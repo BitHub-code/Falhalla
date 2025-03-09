@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bkeib6hfj71ql"]
+
+[node name="Drinking_area" type="Area2D"]
+collision_layer = 2
+collision_mask = 0

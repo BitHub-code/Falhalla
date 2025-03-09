@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://h4bb66fxtl5"
+path="res://.godot/imported/Sketchbook 2024-07-04_MainThemeMaybe.ogg-e444bc19cab53596540fa9ef0813af94.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sketchbook 2024-07-04_MainThemeMaybe.ogg"
+dest_files=["res://.godot/imported/Sketchbook 2024-07-04_MainThemeMaybe.ogg-e444bc19cab53596540fa9ef0813af94.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

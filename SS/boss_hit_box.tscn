@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck17u5rmvmvts"]
+
+[ext_resource type="Script" path="res://SS/boss_hit_box.gd" id="1_3nls6"]
+
+[node name="boss_hit_box" type="Area2D"]
+position = Vector2(6.41825, -14.031)
+rotation = -0.276094
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_3nls6")

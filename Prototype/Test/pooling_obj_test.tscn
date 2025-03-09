@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1rraeik1mgnd"]
+
+[ext_resource type="Script" path="res://Prototype/Test/pooling_obj_test.gd" id="1_64d78"]
+[ext_resource type="PackedScene" uid="uid://cvaxcapxbhjml" path="res://SS/enemy.tscn" id="2_7xvy2"]
+
+[node name="PoolingObjTest" type="Node2D"]
+script = ExtResource("1_64d78")
+
+[node name="Enemy" parent="." instance=ExtResource("2_7xvy2")]
+position = Vector2(94, 419)
+speed = 0.0
+hp = 20000.0
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

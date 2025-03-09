@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://5fdqqjr84jud"]
+
+[ext_resource type="Script" path="res://SS/rigid_body_projectile_bottle.gd" id="1_52k8b"]
+[ext_resource type="Texture2D" uid="uid://en70cdrlfx33" path="res://Sprites/Objects/64x64.png" id="2_1fgjl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4kp25"]
+radius = 23.0868
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hwpnv"]
+radius = 28.0713
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx3q0"]
+size = Vector2(33, 33)
+
+[node name="RigidBody_projectile_bottle" type="RigidBody2D"]
+top_level = true
+collision_layer = 0
+collision_mask = 2
+mass = 0.2
+inertia = 1.0
+script = ExtResource("1_52k8b")
+impulse_force = Vector2(15, -5)
+
+[node name="Obj2" type="Sprite2D" parent="."]
+texture = ExtResource("2_1fgjl")
+hframes = 16
+vframes = 137
+frame = 271
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4kp25")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(4, 4)
+shape = SubResource("CircleShape2D_hwpnv")
+debug_color = Color(0.950402, 2.31028e-06, 0.568778, 0.42)
+
+[node name="DrinkBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DrinkBox"]
+position = Vector2(-16.5, -16.5)
+shape = SubResource("RectangleShape2D_jx3q0")
+debug_color = Color(0.283057, 0.630916, 0, 0.42)
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://c8b0645eoy6s2"]
+
+[ext_resource type="Texture2D" uid="uid://cfsqnkqvow8qt" path="res://Sprites/Characters/Bosses/PurpleRope/Agis.png" id="1_2l8c8"]
+[ext_resource type="Texture2D" uid="uid://b3m8ro1v1ekwg" path="res://Sprites/Characters/Bosses/PurpleHead/purple_flame.png" id="2_mv7sp"]
+[ext_resource type="Texture2D" uid="uid://b7cpdodoo6qmb" path="res://Sprites/Characters/Bosses/PurpleHead/purple_left.png" id="3_nqv47"]
+[ext_resource type="Texture2D" uid="uid://b43n0uj7hf5cl" path="res://Sprites/Characters/Bosses/PurpleHead/purple_middle.png" id="4_mlk84"]
+[ext_resource type="Texture2D" uid="uid://dtj6d4ylypbyp" path="res://Sprites/Characters/Bosses/PurpleHead/purple_right.png" id="5_iak0m"]
+
+[sub_resource type="Animation" id="Animation_m7bqv"]
+resource_name = "Agis_idle"
+length = 1.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Agis:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_6wguj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Agis:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4mvsx"]
+_data = {
+"Agis_idle": SubResource("Animation_m7bqv"),
+"RESET": SubResource("Animation_6wguj")
+}
+
+[node name="Boss_collection" type="Node2D"]
+
+[node name="Agis" type="Sprite2D" parent="."]
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("1_2l8c8")
+hframes = 15
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4mvsx")
+}
+
+[node name="PurpleFlame" type="Sprite2D" parent="."]
+position = Vector2(184, 439.6)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_mv7sp")
+
+[node name="PurpleFlame2" type="Sprite2D" parent="."]
+position = Vector2(62, 533)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_mv7sp")
+
+[node name="PurpleFlame3" type="Sprite2D" parent="."]
+position = Vector2(347, 527)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_mv7sp")
+
+[node name="PurpleLeft" type="Sprite2D" parent="."]
+position = Vector2(184, 439.6)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_nqv47")
+
+[node name="PurpleMiddle" type="Sprite2D" parent="."]
+position = Vector2(184, 439.6)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_mlk84")
+
+[node name="PurpleRight" type="Sprite2D" parent="."]
+position = Vector2(184, 439.6)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_iak0m")

@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgmrrq0c6u767"]
+
+[ext_resource type="Script" path="res://SS/rigid_body_projectile.gd" id="1_ntxct"]
+[ext_resource type="Texture2D" uid="uid://en70cdrlfx33" path="res://Sprites/Objects/64x64.png" id="1_x6yd6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gksf"]
+size = Vector2(6, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s10w8"]
+size = Vector2(10, 15)
+
+[node name="RigidBody_projectile" type="RigidBody2D"]
+top_level = true
+collision_layer = 0
+collision_mask = 2
+mass = 0.5
+lock_rotation = true
+script = ExtResource("1_ntxct")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_8gksf")
+
+[node name="Obj2" type="Sprite2D" parent="."]
+position = Vector2(-1.90735e-06, 5)
+rotation = 2.35619
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_x6yd6")
+hframes = 16
+vframes = 137
+frame = 726
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_s10w8")
+debug_color = Color(0.950402, 2.31028e-06, 0.568778, 0.42)
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

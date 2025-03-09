@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://dbllqoc5t17o"]
+
+[ext_resource type="Texture2D" uid="uid://dkf7bgmg0byak" path="res://Sprites/UI/target_round_b.png" id="1_e65uo"]
+[ext_resource type="Script" path="res://Prototype/mouse_cursor.gd" id="1_wd50q"]
+[ext_resource type="Texture2D" uid="uid://bl0bibdr7b03x" path="res://Sprites/UI/tool_axe_single.png" id="2_u6kc2"]
+[ext_resource type="Texture2D" uid="uid://c0cc6hu8v0xyn" path="res://Sprites/UI/tool_bomb.png" id="3_t0a84"]
+[ext_resource type="Texture2D" uid="uid://b21re2uu7grn4" path="res://Sprites/UI/tool_bow.png" id="4_itngu"]
+[ext_resource type="Texture2D" uid="uid://neakqnf5je7m" path="res://Sprites/UI/tool_hammer.png" id="5_cb61a"]
+[ext_resource type="Texture2D" uid="uid://bbgsefxh8smyh" path="res://Sprites/UI/tool_sword_a.png" id="6_vk5q8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bl32o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_u6kc2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_t0a84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_itngu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cb61a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vk5q8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Mouse_cursor" type="Node2D"]
+script = ExtResource("1_wd50q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_e65uo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_bl32o")

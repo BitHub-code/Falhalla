@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://lh5mgi2su76l"]
+
+[ext_resource type="Script" path="res://SS/area_atk.gd" id="1_vtn23"]
+
+[node name="Area_atk" type="Area2D"]
+script = ExtResource("1_vtn23")

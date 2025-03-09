@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://bt3fojnbbjmxb"]
+
+[ext_resource type="Script" path="res://SS/group_projectile.gd" id="1_h0o7l"]
+[ext_resource type="Texture2D" uid="uid://d3wyyp6dmkei5" path="res://Sprites/Attacks/mead0.png" id="1_qv5oh"]
+[ext_resource type="Texture2D" uid="uid://5h75qkrb0eix" path="res://Sprites/Attacks/mead1.png" id="2_40cg1"]
+[ext_resource type="Texture2D" uid="uid://b8mq73kwhsweb" path="res://Sprites/Attacks/mead2.png" id="3_frdqf"]
+[ext_resource type="Texture2D" uid="uid://2gi3isv60t0f" path="res://Sprites/Attacks/mead3.png" id="4_vomc7"]
+[ext_resource type="Texture2D" uid="uid://45ruevbo6ehg" path="res://Sprites/Attacks/mead4.png" id="5_ro8qy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_grsui"]
+size = Vector2(2, 13)
+
+[node name="Mead_group" type="Area2D"]
+top_level = true
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_h0o7l")
+
+[node name="0" type="CollisionShape2D" parent="."]
+position = Vector2(-10, 19.5)
+shape = SubResource("RectangleShape2D_grsui")
+
+[node name="Obj0" type="Sprite2D" parent="0"]
+position = Vector2(10, -19.5)
+texture = ExtResource("1_qv5oh")
+
+[node name="1" type="CollisionShape2D" parent="."]
+position = Vector2(-5, 23.5)
+shape = SubResource("RectangleShape2D_grsui")
+
+[node name="Obj1" type="Sprite2D" parent="1"]
+position = Vector2(5, -23.5)
+texture = ExtResource("2_40cg1")
+
+[node name="2" type="CollisionShape2D" parent="."]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_grsui")
+
+[node name="Obj2" type="Sprite2D" parent="2"]
+position = Vector2(0, -25.5)
+texture = ExtResource("3_frdqf")
+
+[node name="3" type="CollisionShape2D" parent="."]
+position = Vector2(5, 23.5)
+shape = SubResource("RectangleShape2D_grsui")
+
+[node name="Obj3" type="Sprite2D" parent="3"]
+position = Vector2(-5, -23.5)
+texture = ExtResource("4_vomc7")
+
+[node name="4" type="CollisionShape2D" parent="."]
+position = Vector2(10, 19.5)
+shape = SubResource("RectangleShape2D_grsui")
+
+[node name="Obj4" type="Sprite2D" parent="4"]
+position = Vector2(-10, -19.5)
+texture = ExtResource("5_ro8qy")
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

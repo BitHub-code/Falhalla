@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=3 uid="uid://cfxyxto1hnbsa"]
+
+[ext_resource type="Script" path="res://Prototype/test_world.gd" id="1_m4au3"]
+[ext_resource type="PackedScene" uid="uid://cx4vcbr1rnu7n" path="res://Prototype/custom_fall_paralax.tscn" id="2_50xbh"]
+[ext_resource type="PackedScene" uid="uid://6sbgmt4ijim4" path="res://Prototype/player_character.tscn" id="2_jfv77"]
+[ext_resource type="PackedScene" uid="uid://cvaxcapxbhjml" path="res://SS/enemy.tscn" id="4_8nutu"]
+[ext_resource type="Script" path="res://Prototype/spawner.gd" id="5_7pbwh"]
+[ext_resource type="PackedScene" uid="uid://dhmvaem648or" path="res://SS/enemy_shooting.tscn" id="6_rr1w1"]
+[ext_resource type="PackedScene" uid="uid://dbllqoc5t17o" path="res://Prototype/mouse_cursor.tscn" id="8_qhhc4"]
+[ext_resource type="AudioStream" uid="uid://h4bb66fxtl5" path="res://Sound/Sketchbook 2024-07-04_MainThemeMaybe.ogg" id="9_6kfxv"]
+[ext_resource type="PackedScene" uid="uid://cg5wcl6aum21k" path="res://SS/main_menu_ui.tscn" id="9_o1s3i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vhb25"]
+size = Vector2(20, 1837)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jln8"]
+size = Vector2(1220, 20)
+
+[node name="TestWorld" type="Node2D"]
+script = ExtResource("1_m4au3")
+
+[node name="CustomFallParalax" parent="." instance=ExtResource("2_50xbh")]
+modulate = Color(0.733005, 0.733005, 0.733005, 1)
+scrolling_speed = 20.0
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_jfv77")]
+position = Vector2(202, 316)
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_8nutu")]
+position = Vector2(923, 105)
+player = NodePath("../PlayerCharacter")
+
+[node name="ScreenBox" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenBox"]
+position = Vector2(10, 918.5)
+shape = SubResource("RectangleShape2D_vhb25")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ScreenBox"]
+position = Vector2(353, 918.5)
+shape = SubResource("RectangleShape2D_vhb25")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ScreenBox"]
+position = Vector2(567, 0)
+shape = SubResource("RectangleShape2D_3jln8")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="ScreenBox"]
+position = Vector2(560, 628)
+shape = SubResource("RectangleShape2D_3jln8")
+
+[node name="Spawner" type="Marker2D" parent="."]
+position = Vector2(371, 463)
+script = ExtResource("5_7pbwh")
+unit = ExtResource("6_rr1w1")
+timer_spawn = 3.0
+
+[node name="Spawner2" type="Marker2D" parent="."]
+position = Vector2(369, 91)
+script = ExtResource("5_7pbwh")
+unit = ExtResource("4_8nutu")
+timer_spawn = 4.0
+
+[node name="Enemy_shooting" parent="." instance=ExtResource("6_rr1w1")]
+position = Vector2(95, 475)
+speed = 0.0
+attack_speed = 0.3
+
+[node name="Enemy_shooting2" parent="." instance=ExtResource("6_rr1w1")]
+position = Vector2(95, 102)
+speed = 0.0
+attack_speed = 0.3
+hp = 9000.0
+
+[node name="Mouse_cursor" parent="." instance=ExtResource("8_qhhc4")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("9_o1s3i")]
+process_mode = 3
+visible = false
+scene_path = ""
+pause_menu_mode = true
+
+[node name="MainTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_6kfxv")
+volume_db = -10.0
+autoplay = true

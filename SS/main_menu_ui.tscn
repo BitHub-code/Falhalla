@@ -1,0 +1,257 @@
+[gd_scene load_steps=5 format=3 uid="uid://cg5wcl6aum21k"]
+
+[ext_resource type="Script" path="res://SS/main_menu_ui.gd" id="1_v04oi"]
+[ext_resource type="PackedScene" uid="uid://bjsq3qlguii60" path="res://SS/volume_slider.tscn" id="2_nve22"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1g5ei"]
+bg_color = Color(0.168627, 0.168627, 0.168627, 0.698039)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8dqto"]
+bg_color = Color(0.12549, 0.12549, 0.12549, 0.980392)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v04oi")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1g5ei")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -225.0
+offset_right = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Main" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Title" type="Label" parent="MarginContainer/Main"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "PROTOTYPE: Falhalla"
+horizontal_alignment = 1
+
+[node name="Start" type="Button" parent="MarginContainer/Main"]
+layout_mode = 2
+text = "Start game"
+
+[node name="Restart" type="Button" parent="MarginContainer/Main"]
+visible = false
+layout_mode = 2
+text = "Restart"
+
+[node name="Options" type="Button" parent="MarginContainer/Main"]
+layout_mode = 2
+text = "Options"
+
+[node name="Control_inst" type="Button" parent="MarginContainer/Main"]
+layout_mode = 2
+text = "Control instructions"
+
+[node name="Exit" type="Button" parent="MarginContainer/Main"]
+layout_mode = 2
+text = "Quit game"
+
+[node name="Options" type="VBoxContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/Options"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 40
+text = "Options"
+
+[node name="Cancel" type="Button" parent="MarginContainer/Options/Label"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+text = "X"
+
+[node name="Button" type="Button" parent="MarginContainer/Options"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Sound"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/Options"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/Options"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Master" type="Label" parent="MarginContainer/Options/HBoxContainer2"]
+layout_mode = 2
+text = "Master"
+
+[node name="Master_Slider" parent="MarginContainer/Options/HBoxContainer2" instance=ExtResource("2_nve22")]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Options/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="MarginContainer/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Graphics"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/Options"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Options"]
+layout_mode = 2
+
+[node name="FS_label" type="Label" parent="MarginContainer/Options/HBoxContainer"]
+layout_mode = 2
+text = "Full screen:"
+
+[node name="FullScreen" type="CheckBox" parent="MarginContainer/Options/HBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Options/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label_res" type="Label" parent="MarginContainer/Options/HBoxContainer"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="ResOptions" type="OptionButton" parent="MarginContainer/Options/HBoxContainer"]
+layout_mode = 2
+item_count = 4
+popup/item_0/text = "1920x1080"
+popup/item_1/text = "1280x720"
+popup/item_1/id = 1
+popup/item_2/text = "1024x600"
+popup/item_2/id = 2
+popup/item_3/text = "800x600"
+popup/item_3/id = 3
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/Options/HBoxContainer"]
+layout_mode = 2
+
+[node name="ControlInstructions" type="Panel" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ControlInstructions"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/ControlInstructions/MarginContainer"]
+layout_mode = 2
+text = "Weapons:
+1 - Drop knife
+2 - Lightning smash
+3 - Wind, based on direction of movement, if direction then picks random
+4 - Arrow shots, with some physics simulation + affected by character movement
+5 - Homing projectiles, if no target close enough to player, follows mouse cursor
+
+Shooting: Spacebar or L mouse click
+
+WASD or Arrow keys for movement. Down has instant max velocity, while the rest build up with a slight delay"
+
+[node name="Cancel2" type="Button" parent="MarginContainer/ControlInstructions/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "X"
+
+[node name="ConfirmPanel" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(300, 140)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -70.0
+offset_right = 150.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8dqto")
+
+[node name="MarginContainer" type="MarginContainer" parent="ConfirmPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="ConfirmPanel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Are you sure?"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmPanel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="Yes" type="Button" parent="ConfirmPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Yes"
+
+[node name="No" type="Button" parent="ConfirmPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "No"
+
+[connection signal="button_down" from="MarginContainer/Main/Start" to="." method="_on_start_button_down"]
+[connection signal="button_down" from="MarginContainer/Main/Restart" to="." method="_on_restart_button_down"]
+[connection signal="button_down" from="MarginContainer/Main/Options" to="." method="_on_options_button_down"]
+[connection signal="button_down" from="MarginContainer/Main/Control_inst" to="." method="_on_control_inst_button_down"]
+[connection signal="button_down" from="MarginContainer/Main/Exit" to="." method="_on_exit_button_down"]
+[connection signal="button_down" from="MarginContainer/Options/Label/Cancel" to="." method="_on_cancel_button_down"]
+[connection signal="toggled" from="MarginContainer/Options/HBoxContainer/FullScreen" to="." method="_on_full_screen_toggled"]
+[connection signal="item_selected" from="MarginContainer/Options/HBoxContainer/ResOptions" to="." method="_on_res_options_item_selected"]
+[connection signal="button_down" from="MarginContainer/ControlInstructions/MarginContainer/Cancel2" to="." method="_on_cancel_2_button_down"]
+[connection signal="button_down" from="ConfirmPanel/MarginContainer/HBoxContainer/Yes" to="." method="_on_yes_button_down"]
+[connection signal="button_down" from="ConfirmPanel/MarginContainer/HBoxContainer/No" to="." method="_on_no_button_down"]
