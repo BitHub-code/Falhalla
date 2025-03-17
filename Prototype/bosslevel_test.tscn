@@ -6,7 +6,7 @@
 [node name="Boss_test" type="Node2D"]
 
 [node name="Purple_skull_boss" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_l2w0q")]
-position = Vector2(288, 466)
+position = Vector2(268, 544)
 player = NodePath("../PlayerCharacter")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_g0ahs")]

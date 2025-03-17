@@ -38,7 +38,7 @@ var damage := 5.0
 var defeated := false:
 	set(b):
 		defeated = b
-		if defeated: $"../CanvasLayer/MainMenu".pause()
+		#if defeated: $"../CanvasLayer/MainMenu".pause()
 var targets_list:Array[CharacterBody2D] = []
 var atk_speed := 0.5
 var atk_timer := 0.0
@@ -49,12 +49,11 @@ var hp := 100.0:
 		hp = f
 		health_bar.value = hp
 
-var atk_charge := 0.0:
-	set(f):
-		atk_charge = clampf(f, 0.0, 1.0)
+var atk_charge := 0.0
 var current_atk :int = 0:
 	set(i):
 		current_atk = i
+		
 		match i:
 			0: #drop knife
 				weapon_icon.frame = 726
@@ -103,16 +102,19 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, 10.0)
 		velocity.y = move_toward(velocity.y, 0, 10.0)
 	elif drunk:
-		velocity = direction * SPEED
+		velocity.x = move_toward(velocity.x, direction.x * SPEED, 10.0) 
+		if direction.y > 0.0:
+			#velocity.y = lerpf(velocity.y, direction.y * SPEED, 0.2)
+			velocity.y = move_toward(velocity.y, direction.y * SPEED, 30.0)
+			
+		else:
+			velocity.y = move_toward(velocity.y, direction.y * SPEED, 6.5)
+		#drunk bonuses
 		hp += delta * 0.2
 	elif direction:
-		velocity.x = move_toward(velocity.x, direction.x * SPEED, 11.0) 
-		if direction.y > 0.0:
-			velocity.y = direction.y * SPEED
-		else:
-			velocity.y = move_toward(velocity.y, direction.y * SPEED, 7.0)
+		velocity = direction * SPEED * 0.5
 		
-		#.y > 0.0 shoud start sudden in contrast to anything else
+		
 		
 	else:
 		velocity.x = move_toward(velocity.x, 0, 10.0)
@@ -179,6 +181,7 @@ func _physics_process(delta: float) -> void:
 			temp.disabled = true
 			
 			atk_charge = 0.0
+			queue_redraw()
 			damage = 30.0
 			await get_tree().create_timer(0.2).timeout
 			no_move_input = false
@@ -192,9 +195,12 @@ func _physics_process(delta: float) -> void:
 					new_proj.global_position = global_position + Vector2(0.0, 18.0)
 					add_child(new_proj)
 				1:
-					if sprite.animation != "smash":
-						atk_charge += delta
-						draw_circle(global_position, 50.0 * (1.0 + 3.0*atk_charge), Color.WHITE, true, 20.0, false)
+					if sprite.animation != "smash" and !$Impact_anim.is_playing():
+						if atk_charge < 0.2:
+							atk_charge += delta #DOESN'T GET COUNTED EVERY FRAME
+							if atk_charge > 0.2: atk_charge = 0.2
+						print(atk_charge)
+						queue_redraw()
 				2:
 					var new_proj = wind_proj.instantiate()
 					new_proj.global_position = global_position
@@ -239,19 +245,20 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("shoot"):
-	if event.is_action_pressed("mouse_wheel_up"):
+	
+	if event.is_action_pressed("mouse_wheel_up") and atk_charge == 0.0:
 		current_atk = (current_atk + 1) % 7
-	if event.is_action_pressed("mouse_wheel_down"):
+	if event.is_action_pressed("mouse_wheel_down") and atk_charge == 0.0:
 		current_atk -= 1
 		if current_atk < 0: current_atk = 6 
 			
-	if event.is_action_pressed("hotkey1"): current_atk = 0
-	if event.is_action_pressed("hotkey2"): current_atk = 1
-	if event.is_action_pressed("hotkey3"): current_atk = 2
-	if event.is_action_pressed("hotkey4"): current_atk = 3
-	if event.is_action_pressed("hotkey5"): current_atk = 4
-	if event.is_action_pressed("hotkey6"): current_atk = 5
-	if event.is_action_pressed("hotkey7"): current_atk = 6
+	if event.is_action_pressed("hotkey1") and atk_charge == 0.0: current_atk = 0
+	if event.is_action_pressed("hotkey2") and atk_charge == 0.0: current_atk = 1
+	if event.is_action_pressed("hotkey3") and atk_charge == 0.0: current_atk = 2
+	if event.is_action_pressed("hotkey4") and atk_charge == 0.0: current_atk = 3
+	if event.is_action_pressed("hotkey5") and atk_charge == 0.0: current_atk = 4
+	if event.is_action_pressed("hotkey6") and atk_charge == 0.0: current_atk = 5
+	if event.is_action_pressed("hotkey7") and atk_charge == 0.0: current_atk = 6
 
 func take_damage(amount:float) -> void:
 	hp -= amount
@@ -285,6 +292,10 @@ func closest_target():
 			final_target = target.global_position
 	return final_target
 	
+
+func _draw() -> void:
+	if atk_charge != 0.0:
+		draw_circle(Vector2.ZERO, 50.0 * (1.0 + 3.0*atk_charge), Color.WHITE, false, -2.0, false)
 
 
 func _on_auto_targets_body_entered(body: Node2D) -> void:

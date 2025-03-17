@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://d4ksy75sx4hw1"]
+
+[ext_resource type="Script" path="res://SS/rigid_body_projectile_arrow.gd" id="1_2lvrc"]
+[ext_resource type="Texture2D" uid="uid://hovobabfe0ld" path="res://Sprites/VFX/SunnyPack/fire-ball.png" id="2_ipfb0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y48yy"]
+atlas = ExtResource("2_ipfb0")
+region = Rect2(0, 0, 52, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmikq"]
+atlas = ExtResource("2_ipfb0")
+region = Rect2(52, 0, 52, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ampuw"]
+atlas = ExtResource("2_ipfb0")
+region = Rect2(104, 0, 52, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_je0ud"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y48yy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmikq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ampuw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqdxt"]
+size = Vector2(14, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_38nb0"]
+size = Vector2(7, 8)
+
+[node name="RigidBody_projectile" type="RigidBody2D"]
+top_level = true
+collision_layer = 0
+collision_mask = 0
+mass = 0.5
+center_of_mass_mode = 1
+script = ExtResource("1_2lvrc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.762025, 0.184242, 1, 1)
+sprite_frames = SubResource("SpriteFrames_je0ud")
+frame_progress = 0.133982
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wqdxt")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(12, 0)
+shape = SubResource("RectangleShape2D_38nb0")
+debug_color = Color(0.950402, 2.31028e-06, 0.568778, 0.42)
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

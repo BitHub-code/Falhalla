@@ -3,32 +3,29 @@ extends Area2D
 @export var damage := 5.0
 @export var speed := 50.0
 @export var expiration_time := 10.0
-@export var homing := false
+@export var homing := true
 @onready var sprite: Sprite2D = $Sprite
-@onready var marker: Sprite2D = $Marker
-
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 var og_parent:CharacterBody2D
 var direction := Vector2.RIGHT
 var timer := 0.0
-var actual_target:PhysicsBody2D #currently not used
 var target_pos:Vector2:
 	set(vector):
 		target_pos = vector
-		$Marker.global_position = target_pos
+		#$Marker.global_position = target_pos
 
 func _ready() -> void:
-	if homing:
-		sprite.frame = 844
+	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# Growth period, speed per size?, chasing player, stops/slows on being hit
 func _process(delta: float) -> void:
 	if homing:
 		if target_pos or target_pos != Vector2.ZERO:
 			direction = (target_pos - global_position)
 			if direction.length() < 22.0:
-				var new_target: Vector2 = get_parent().closest_target()
+				var new_target = get_parent().closest_target()
 				if new_target:
 					target_pos = new_target
 				#pick new target
@@ -36,7 +33,7 @@ func _process(delta: float) -> void:
 				direction = direction.normalized()
 		else:
 			direction = (get_global_mouse_position() - global_position).normalized()
-		rotation = lerp_angle(rotation, direction.angle(), 0.145)
+		#rotation = lerp_angle(rotation, direction.angle(), 0.145)
 		direction = Vector2.RIGHT.rotated(rotation)
 		
 	global_position += direction * delta * speed

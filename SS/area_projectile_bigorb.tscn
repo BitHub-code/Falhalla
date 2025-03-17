@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhwi7vnrbqlh8"]
+
+[ext_resource type="Script" path="res://SS/area_projectile_bigorb.gd" id="1_hoiet"]
+[ext_resource type="Texture2D" uid="uid://cwe71b0ufm66j" path="res://Sprites/Attacks/Agis_ball.png" id="2_bk4i7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2tjvh"]
+radius = 3.0
+
+[node name="Area_projectile" type="Area2D"]
+top_level = true
+z_index = -1
+collision_layer = 0
+script = ExtResource("1_hoiet")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_bk4i7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2tjvh")
+disabled = true
+debug_color = Color(0.966987, 0, 0.477097, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
