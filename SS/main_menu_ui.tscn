@@ -54,7 +54,11 @@ horizontal_alignment = 1
 
 [node name="Start" type="Button" parent="MarginContainer/Main"]
 layout_mode = 2
-text = "Start game"
+text = "Start Test Level"
+
+[node name="BossLevel" type="Button" parent="MarginContainer/Main"]
+layout_mode = 2
+text = "Start Boss Level"
 
 [node name="Restart" type="Button" parent="MarginContainer/Main"]
 visible = false
@@ -68,6 +72,11 @@ text = "Options"
 [node name="Control_inst" type="Button" parent="MarginContainer/Main"]
 layout_mode = 2
 text = "Control instructions"
+
+[node name="ToMainMenu" type="Button" parent="MarginContainer/Main"]
+visible = false
+layout_mode = 2
+text = "Quit to Main Menu"
 
 [node name="Exit" type="Button" parent="MarginContainer/Main"]
 layout_mode = 2
@@ -245,9 +254,11 @@ layout_mode = 2
 text = "No"
 
 [connection signal="button_down" from="MarginContainer/Main/Start" to="." method="_on_start_button_down"]
+[connection signal="button_down" from="MarginContainer/Main/BossLevel" to="." method="_on_boss_level_button_down"]
 [connection signal="button_down" from="MarginContainer/Main/Restart" to="." method="_on_restart_button_down"]
 [connection signal="button_down" from="MarginContainer/Main/Options" to="." method="_on_options_button_down"]
 [connection signal="button_down" from="MarginContainer/Main/Control_inst" to="." method="_on_control_inst_button_down"]
+[connection signal="button_down" from="MarginContainer/Main/ToMainMenu" to="." method="_on_to_main_menu_button_down"]
 [connection signal="button_down" from="MarginContainer/Main/Exit" to="." method="_on_exit_button_down"]
 [connection signal="button_down" from="MarginContainer/Options/Label/Cancel" to="." method="_on_cancel_button_down"]
 [connection signal="toggled" from="MarginContainer/Options/HBoxContainer/FullScreen" to="." method="_on_full_screen_toggled"]

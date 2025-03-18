@@ -34,11 +34,11 @@ player = NodePath("../PlayerCharacter")
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenBox"]
-position = Vector2(10, 918.5)
+position = Vector2(-9, 918.5)
 shape = SubResource("RectangleShape2D_vhb25")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="ScreenBox"]
-position = Vector2(353, 918.5)
+position = Vector2(369, 918.5)
 shape = SubResource("RectangleShape2D_vhb25")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="ScreenBox"]
@@ -46,7 +46,7 @@ position = Vector2(567, 0)
 shape = SubResource("RectangleShape2D_3jln8")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="ScreenBox"]
-position = Vector2(560, 628)
+position = Vector2(560, 631)
 shape = SubResource("RectangleShape2D_3jln8")
 
 [node name="Spawner" type="Marker2D" parent="."]

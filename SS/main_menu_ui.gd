@@ -9,6 +9,7 @@ signal confirm_signal
 @onready var res_options: OptionButton = $MarginContainer/Options/HBoxContainer/ResOptions
 
 @export var scene_path:String = "res://Prototype/test_world.tscn"
+@export var bl_scene_path:String = "res://Prototype/bosslevel_test.tscn"
 
 @export var pause_menu_mode:bool = false
 
@@ -37,6 +38,8 @@ func _ready() -> void:
 		$MarginContainer/Main/Title.text = "PAUSE MENU"
 		$MarginContainer/Main/Start.text = "Resume game"
 		$MarginContainer/Main/Restart.visible = true
+		$MarginContainer/Main/ToMainMenu.visible = true
+		$MarginContainer/Main/BossLevel.visible = false
 	else:
 		for index in AudioServer.bus_count:
 			AudioServer.set_bus_volume_db(
@@ -160,3 +163,11 @@ func _on_master_slider_value_changed(value: float) -> void:
 
 func _on_restart_button_down() -> void:
 	get_tree().reload_current_scene()
+
+
+func _on_boss_level_button_down() -> void:
+	get_tree().change_scene_to_file(bl_scene_path)
+
+
+func _on_to_main_menu_button_down() -> void:
+	get_tree().change_scene_to_file("res://SS/main_menu_ui.tscn")

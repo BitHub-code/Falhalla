@@ -10,33 +10,33 @@ extends Area2D
 var og_parent:CharacterBody2D
 var direction := Vector2.RIGHT
 var timer := 0.0
-var target_pos:Vector2:
+var target:CharacterBody2D
+var target_pos := Vector2.ZERO:
 	set(vector):
+		if vector != Vector2.ZERO: modulate = Color.DARK_GRAY
+		else: modulate = Color.WHITE
 		target_pos = vector
-		#$Marker.global_position = target_pos
 
 func _ready() -> void:
 	pass
+	
 
 
 # Growth period, speed per size?, chasing player, stops/slows on being hit
 func _process(delta: float) -> void:
 	if homing:
-		if target_pos or target_pos != Vector2.ZERO:
-			direction = (target_pos - global_position)
-			if direction.length() < 22.0:
-				var new_target = get_parent().closest_target()
-				if new_target:
-					target_pos = new_target
-				#pick new target
-			else:
-				direction = direction.normalized()
+		if target_pos != Vector2.ZERO:
+			direction = global_position.direction_to(target_pos)
+			global_position += direction * delta * speed
+			if global_position.distance_to(target_pos) < 4.0: target_pos = Vector2.ZERO
+		elif target:
+			global_position = global_position.lerp(target.global_position, 1.0 * delta) 
+			if global_position.distance_to(target.global_position) < 70.0:
+				target_pos = target.global_position
 		else:
-			direction = (get_global_mouse_position() - global_position).normalized()
-		#rotation = lerp_angle(rotation, direction.angle(), 0.145)
-		direction = Vector2.RIGHT.rotated(rotation)
-		
-	global_position += direction * delta * speed
+			direction = Vector2.RIGHT
+			global_position += direction * delta * speed
+	
 	timer += delta
 	if timer > expiration_time:
 		queue_free()

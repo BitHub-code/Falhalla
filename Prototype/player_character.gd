@@ -197,7 +197,7 @@ func _physics_process(delta: float) -> void:
 				1:
 					if sprite.animation != "smash" and !$Impact_anim.is_playing():
 						if atk_charge < 0.2:
-							atk_charge += delta #DOESN'T GET COUNTED EVERY FRAME
+							atk_charge += delta*3.0 #DOESN'T GET COUNTED EVERY FRAME
 							if atk_charge > 0.2: atk_charge = 0.2
 						print(atk_charge)
 						queue_redraw()

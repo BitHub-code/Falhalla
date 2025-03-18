@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://clxkv8mlqnj42"]
+[gd_scene load_steps=8 format=3 uid="uid://clxkv8mlqnj42"]
 
 [ext_resource type="PackedScene" uid="uid://cqkmxdwv4jm2i" path="res://SS/boss_phead.tscn" id="1_l2w0q"]
 [ext_resource type="PackedScene" uid="uid://6sbgmt4ijim4" path="res://Prototype/player_character.tscn" id="2_g0ahs"]
+[ext_resource type="PackedScene" uid="uid://dbllqoc5t17o" path="res://Prototype/mouse_cursor.tscn" id="3_0778p"]
+[ext_resource type="PackedScene" uid="uid://cg5wcl6aum21k" path="res://SS/main_menu_ui.tscn" id="4_pb33o"]
+[ext_resource type="AudioStream" uid="uid://b3ah4a70aevfl" path="res://Sound/Sketchbook 2024-12-21_MTM.ogg" id="5_y2axm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rrst6"]
+size = Vector2(20, 1837)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7nutv"]
+size = Vector2(1220, 20)
 
 [node name="Boss_test" type="Node2D"]
 
@@ -10,3 +19,38 @@ position = Vector2(268, 544)
 player = NodePath("../PlayerCharacter")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_g0ahs")]
+position = Vector2(166, 79)
+
+[node name="Mouse_cursor" parent="." instance=ExtResource("3_0778p")]
+
+[node name="ScreenBox" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenBox"]
+position = Vector2(-9, 918.5)
+shape = SubResource("RectangleShape2D_rrst6")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ScreenBox"]
+position = Vector2(369, 918.5)
+shape = SubResource("RectangleShape2D_rrst6")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ScreenBox"]
+position = Vector2(567, 0)
+shape = SubResource("RectangleShape2D_7nutv")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="ScreenBox"]
+position = Vector2(560, 631)
+shape = SubResource("RectangleShape2D_7nutv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("4_pb33o")]
+process_mode = 3
+visible = false
+scene_path = ""
+pause_menu_mode = true
+
+[node name="MainTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_y2axm")
+volume_db = -10.0
+autoplay = true
